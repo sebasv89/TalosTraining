@@ -11,7 +11,7 @@ public class Calc {
 		String []nums = {};
 		String strSep = ",";
 		if(strNum.length() >= 1){
-			//System.out.println("-----");
+			System.out.println("-----");
 			//System.out.println(strNum);
 			//System.out.println("-----");
 			strNum = strNum.replace("\n", strSep).replace(SQUARE_BRACKET, "").replace("]", "");
