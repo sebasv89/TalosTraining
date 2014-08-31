@@ -2,47 +2,41 @@ package calculator;
 
 public class Calc {
 	
-	private static final String SQUARE_BRACKET = "[";
+	private static final String SQUARE_BRACKET_OPEN = "[";
+	private static final String SQUARE_BRACKET_CLOSE = "]";
+	private static final String DOUBLE_SLASH = "//";
+	private static final String ENTER = "\n";
+	private static final int LIMIT_STRING = 1;
+	private String ExcepcionCustom = "Negatives not allowed: ";
+	private int suma = 0;
+	private String coma = "";
+	private String []nums = {};
+	private String strSep = ",";
 
 	public int add(String strNum){
-		String exc = "Negatives not allowed: ";
-		int ret = 0;
-		String coma = "";
-		String []nums = {};
-		String strSep = ",";
-		if(strNum.length() >= 1){
-			System.out.println("-----");
+		if(strNum.length() >= LIMIT_STRING){
+			strNum = strNum.replace(ENTER, strSep).replace(SQUARE_BRACKET_OPEN, "").replace(SQUARE_BRACKET_CLOSE, "");
 			//System.out.println(strNum);
-			//System.out.println("-----");
-			strNum = strNum.replace("\n", strSep).replace(SQUARE_BRACKET, "").replace("]", "");
-			//System.out.println(strNum);
-			//System.out.println("-----");
-			if(strNum.contains("//")){
+			if(strNum.contains(DOUBLE_SLASH)){
 				strSep = strNum.substring(2, 3);
 				strNum = strNum.substring(4);
 			}
-			//System.out.println(strNum);
-			//System.out.println("-----");
-			//System.out.println(strSep);
-			//System.out.println("-----");
+			System.out.println(strNum);
+			System.out.println(strSep);
 			nums = strNum.split(strSep);
 			for(int i=0; i<nums.length; i++){
 				if(Integer.parseInt(nums[i]) < 0 ){
-					exc = exc + coma + nums[i];
+					ExcepcionCustom = ExcepcionCustom + coma + nums[i];
 					coma = ",";
 				}
 				if(Integer.parseInt(nums[i]) < 1000){
-					ret = ret + Integer.parseInt(nums[i]);
+					suma = suma + Integer.parseInt(nums[i]);
 				}
 			}
-			if(exc != "Negatives not allowed: "){
-				throw new IllegalArgumentException(exc);
+			if(ExcepcionCustom != "Negatives not allowed: "){
+				throw new IllegalArgumentException(ExcepcionCustom);
 			}
 		}
-		
-		return ret;
-		
+		return suma;	
 	}
-
-
 }
