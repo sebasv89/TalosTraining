@@ -2,48 +2,58 @@ package calculator;
 
 public class Calc {
 	
+	public static void main(String[] args) {
+		Calc suma = new Calc();
+		try{
+			int numberReturn = suma.add("1,1,10,234,1,34565645,234234,232,43,5");
+			System.out.println(numberReturn);
+		}catch(Exception e){
+			throw new IllegalArgumentException("String not valid.");
+		}
+	}
+	
 	private static final String SQUARE_BRACKET_OPEN = "[";
 	private static final String SQUARE_BRACKET_CLOSE = "]";
 	private static final String DOUBLE_SLASH = "//";
 	private static final String ENTER = "\n";
-	private static final String COMA = ",";
+	private static final String COMMA = ",";
 	private static final int LIMIT_STRING = 1;
 	private String ExcepcionCustom = "Negatives not allowed: ";
-	private int suma = 0;
-	private String coma = "";
+	private int plus = 0;
+	private String comma = "";
 	private String []nums = {};
-	private String strSep = ",";
-	private String []separador = {};
+	private String stringSeparator = ",";
+	private String []separator = {};
 
-	public int add(String strNum){
-		if(strNum.length() >= LIMIT_STRING){
-			strNum = formatNumberString(strNum);
-			nums = strNum.split(COMA);
+	public int add(String stringNumber){
+		if(stringNumber.length() >= LIMIT_STRING){
+			stringNumber = formatNumberString(stringNumber);
+			nums = stringNumber.split(COMMA);
 			for(int i=0; i<nums.length; i++){
 				validateNumberNegative(nums[i]);
 				addNumbersMinusOneThousand(nums[i]);
 			}
 		}
 		LaunchException();
-		return suma;
+		return plus;
 	}
 	
 	private String formatNumberString(String numberString){
-		numberString = replaceString(	numberString, ENTER, strSep);
+		numberString = replaceString(	numberString, ENTER, stringSeparator);
 		if(numberString.contains(DOUBLE_SLASH)){
 			if(numberString.contains(SQUARE_BRACKET_CLOSE)){
 				numberString = replaceString(	numberString, SQUARE_BRACKET_OPEN, SQUARE_BRACKET_CLOSE);
-				separador = numberString.split(SQUARE_BRACKET_CLOSE);
-				numberString = numberString.substring(numberString.indexOf(COMA)+1);
-				for(int i = 1;i< separador.length;i=i+2){
-					numberString = numberString.replace(separador[i], COMA);
+				separator = numberString.split(SQUARE_BRACKET_CLOSE);
+				numberString = numberString.substring(numberString.indexOf(COMMA)+1);
+				for(int i = 1;i< separator.length;i=i+2){
+					numberString = numberString.replace(separator[i], COMMA);
 				}
 			}else{
-				strSep = numberString.substring(2, 3);
-				numberString = numberString.substring(numberString.indexOf(COMA)+1);
+				stringSeparator = numberString.substring(2, 3);
+				numberString = numberString.substring(numberString.indexOf(COMMA)+1);
 			}
 		}
-		numberString = numberString.replace(strSep, COMA);
+		numberString = numberString.replace(stringSeparator, COMMA);
 		return numberString;
 	}
 	
@@ -59,14 +69,14 @@ public class Calc {
 	
 	private void addNumbersMinusOneThousand(String number){
 		if(Integer.parseInt(number) < 1000){
-			suma = suma + Integer.parseInt(number);
+			plus = plus + Integer.parseInt(number);
 		}
 	}
 	
 	private void validateNumberNegative(String number){
 		if(Integer.parseInt(number) < 0 ){
-			ExcepcionCustom = ExcepcionCustom + coma + number;
-			coma = ",";
+			ExcepcionCustom = ExcepcionCustom + comma + number;
+			comma = COMMA;
 		}
 	}
 }
