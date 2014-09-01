@@ -120,8 +120,15 @@ public class TestCalc {
 	@Test
 	public void AddStringInputTwoNumberOTwoAddTwoEqualThreeDifferentDelimiterLength() {
 		Calc calculator = new Calc();
-		int ret = calculator.add("//[***]\n[1***2***3]");
+		int ret = calculator.add("//[***]\n1***2***3");
 		assertEquals("Enviando dos numeros (//[***]\n1***2***3) y retornando la suma (6).",6,ret);
+	}
+	
+	@Test
+	public void AddStringInputTwoNumberOTwoAddTwoEqualThreeDifferentDelimiterLengthTwo() {
+		Calc calculator = new Calc();
+		int ret = calculator.add("//[*][%]\n1*2%3");
+		assertEquals("Enviando dos numeros (//[*][%]\n1*2%3) y retornando la suma (6).",6,ret);
 	}
 
 }

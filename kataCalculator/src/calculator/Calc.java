@@ -12,18 +12,23 @@ public class Calc {
 	private String coma = "";
 	private String []nums = {};
 	private String strSep = ",";
+	private String []separador = {};
 
 	public int add(String strNum){
 		if(strNum.length() >= LIMIT_STRING){
-			strNum = strNum.replace(ENTER, strSep).replace(SQUARE_BRACKET_OPEN, "").replace(SQUARE_BRACKET_CLOSE, "");
-			//System.out.println(strNum);
-			if(strNum.contains(DOUBLE_SLASH)){
+			strNum = strNum.replace(ENTER, strSep);
+			if(strNum.contains(DOUBLE_SLASH)){				
 				strSep = strNum.substring(2, 3);
-				strNum = strNum.substring(4);
+				if(strNum.contains(SQUARE_BRACKET_CLOSE)){
+					strNum = strNum.replace(SQUARE_BRACKET_OPEN, SQUARE_BRACKET_CLOSE);
+					separador = strNum.split(SQUARE_BRACKET_CLOSE);
+					System.out.println(strNum);
+					strSep = separador[1];//aca voy.
+				}
+				strNum = strNum.substring(strNum.indexOf(",")+1);
 			}
-			System.out.println(strNum);
-			System.out.println(strSep);
-			nums = strNum.split(strSep);
+			strNum = strNum.replace(strSep, ",");
+			nums = strNum.split(",");
 			for(int i=0; i<nums.length; i++){
 				if(Integer.parseInt(nums[i]) < 0 ){
 					ExcepcionCustom = ExcepcionCustom + coma + nums[i];
