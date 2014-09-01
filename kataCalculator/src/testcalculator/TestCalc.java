@@ -130,5 +130,12 @@ public class TestCalc {
 		int ret = calculator.add("//[*][%]\n1*2%3");
 		assertEquals("Enviando dos numeros (//[*][%]\n1*2%3) y retornando la suma (6).",6,ret);
 	}
+	
+	@Test
+	public void AddStringInputThreeNumberTwoAddThreeAddThreeEqualThreeDifferentDelimiterLengthTwoDiferentLongitude() {
+		Calc calculator = new Calc();
+		int ret = calculator.add("//[**][%%%%]\n2**3%%%%3");
+		assertEquals("Enviando dos numeros (//[**][%%%%]\n2**3%%%%3) y retornando la suma (8).",8,ret);
+	}
 
 }

@@ -22,10 +22,14 @@ public class Calc {
 				if(strNum.contains(SQUARE_BRACKET_CLOSE)){
 					strNum = strNum.replace(SQUARE_BRACKET_OPEN, SQUARE_BRACKET_CLOSE);
 					separador = strNum.split(SQUARE_BRACKET_CLOSE);
-					System.out.println(strNum);
-					strSep = separador[1];//aca voy.
+					strNum = strNum.substring(strNum.indexOf(",")+1);
+					for(int i = 1;i< separador.length;i=i+2){
+						strNum = strNum.replace(separador[i], ",");
+					}
+				}else{
+					strNum = strNum.substring(strNum.indexOf(",")+1);
 				}
-				strNum = strNum.substring(strNum.indexOf(",")+1);
+				
 			}
 			strNum = strNum.replace(strSep, ",");
 			nums = strNum.split(",");
